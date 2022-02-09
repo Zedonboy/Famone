@@ -1,0 +1,109 @@
+#pragma version 5
+txn ApplicationID
+int 0
+==
+bnz main_l16
+txn OnCompletion
+int NoOp
+==
+bnz main_l9
+txn OnCompletion
+int OptIn
+==
+bnz main_l8
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l7
+txn OnCompletion
+int CloseOut
+==
+txn OnCompletion
+int UpdateApplication
+==
+||
+bnz main_l6
+err
+main_l6:
+int 0
+return
+main_l7:
+int 1
+return
+main_l8:
+int 1
+return
+main_l9:
+txna ApplicationArgs 0
+byte "invest"
+==
+bnz main_l15
+txna ApplicationArgs 0
+byte "vote"
+==
+bnz main_l14
+txna ApplicationArgs 0
+byte "register"
+==
+bnz main_l13
+err
+main_l13:
+txna Accounts 1
+byte "max_asset_fund"
+txna ApplicationArgs 1
+btoi
+app_local_put
+int 1
+return
+main_l14:
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txna ApplicationArgs 2
+btoi
+itxn_field XferAsset
+txna ApplicationArgs 1
+btoi
+itxn_field Amount
+txna Accounts 1
+itxn_field AssetReceiver
+itxn_submit
+txna Accounts 1
+byte "vote_count"
+txna Accounts 1
+byte "vote_count"
+app_local_get
+int 1
++
+app_local_put
+int 1
+return
+main_l15:
+itxn_begin
+txn Sender
+itxn_field Sender
+txna Accounts 1
+itxn_field Receiver
+txna ApplicationArgs 1
+btoi
+itxn_field Amount
+int pay
+itxn_field TypeEnum
+itxn_submit
+itxn_begin
+int axfer
+itxn_field TypeEnum
+txna ApplicationArgs 2
+btoi
+itxn_field XferAsset
+txna ApplicationArgs 1
+btoi
+itxn_field AssetAmount
+txn Sender
+itxn_field AssetReceiver
+itxn_submit
+int 1
+return
+main_l16:
+int 1
+return

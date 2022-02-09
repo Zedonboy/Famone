@@ -1,0 +1,37 @@
+{
+  "name": "famone-insurance",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.4.3",
+    "@heroicons/react": "^1.0.5",
+    "@json-rpc-tools/utils": "^1.7.6",
+    "@tailwindcss/forms": "^0.4.0",
+    "@walletconnect/client": "^1.7.1",
+    "algorand-walletconnect-qrcode-modal": "^1.6.1",
+    "algosdk": "^1.13.1",
+    "buffer": "^6.0.3",
+    "path-browserify": "^1.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.2.1",
+    "react-toast-notifications": "^2.5.1",
+    "recoil": "^0.6.1",
+    "swr": "^1.2.1",
+    "tslib": "^2.3.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-inject": "^4.0.4",
+    "@types/node": "^17.0.15",
+    "@types/react": "^17.0.39",
+    "@vitejs/plugin-react": "^1.0.7",
+    "autoprefixer": "^10.4.2",
+    "postcss": "^8.4.6",
+    "tailwindcss": "^3.0.18",
+    "vite": "^2.7.2"
+  }
+}
