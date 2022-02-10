@@ -7,6 +7,10 @@ export default defineConfig({
   plugins: [react(), inject(
     { Buffer: ['buffer', 'Buffer'] }
   )],
+  build: {
+    rollupOptions: {},
+    commonjsOptions: {exclude: ['@walletconnect/client']}
+  },
   resolve: {
     alias: {
       path: 'path-browserify'
