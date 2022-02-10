@@ -18,7 +18,7 @@ function App() {
   const [_, setConnectAcc] = useRecoilState(connectAccountAtom)
   const [_none, setAccount] = useRecoilState(accountAtom)
   useEffect(() => {
-    connector.on("connect", (err, payload) => {
+    connector?.on("connect", (err, payload) => {
       if(err) return
       const { accounts } = payload.params[0];
       setConnectAcc(accounts)
@@ -26,7 +26,7 @@ function App() {
       //render()
     })
 
-    connector.on("session_update", (err, payload) => {
+    connector?.on("session_update", (err, payload) => {
       if(err) return
       // Get updated accounts 
       const { accounts } = payload.params[0];
@@ -35,7 +35,7 @@ function App() {
       //render()
     });
 
-    connector.on("disconnect", (err, payload) => {
+    connector?.on("disconnect", (err, payload) => {
       if(err) return
       setConnectAcc(null)
     });

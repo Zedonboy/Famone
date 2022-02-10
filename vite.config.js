@@ -1,19 +1,13 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import inject from "@rollup/plugin-inject"
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import inject from "@rollup/plugin-inject";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), inject(
-    { Buffer: ['buffer', 'Buffer'] }
-  )],
-  build: {
-    rollupOptions: {},
-    commonjsOptions: {exclude: ['@walletconnect/client']}
-  },
+  plugins: [react(), inject({ Buffer: ["buffer", "Buffer"] })],
   resolve: {
     alias: {
-      path: 'path-browserify'
-    }
-  }
-})
+      path: "path-browserify",
+    },
+  },
+});

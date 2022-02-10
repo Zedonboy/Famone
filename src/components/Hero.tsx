@@ -1,19 +1,3 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
 import { Fragment, useContext } from "react";
 import { Popover, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
@@ -21,19 +5,20 @@ import { ChevronRightIcon } from "@heroicons/react/solid";
 import ActiveProposal from "./ActiveProposal";
 import { WalletConnectClient } from "../context";
 const navigation = [
-  { name: "Product", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
-  { name: "Company", href: "#" },
+  // { name: "Product", href: "#" },
+  { name: "Create Account", href: "/dashboard/create_account" },
+  // { name: "Marketplace", href: "#" },
+  // { name: "Company", href: "#" },
 ];
 
 import useSWR from "swr";
 import { API_URL } from "../../config/config";
 import { fetcher } from "../utils/funcs";
 import { Link } from "react-router-dom";
-
+import { useToasts } from "react-toast-notifications";
 export default function Example() {
   let connector = useContext(WalletConnectClient);
+  let { addToast } = useToasts();
   let { data, error } = useSWR(
     `${API_URL}/api/fund-proposals?status=active`,
     fetcher
@@ -95,26 +80,30 @@ export default function Example() {
               </div>
               <div className="hidden space-x-10 md:flex md:ml-10">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="font-medium text-white hover:text-gray-300"
-                  >
-                    {item.name}
-                  </a>
+                  <Link to={item.href}>
+                    <a
+                      key={item.name}
+                      className="font-medium text-white hover:text-gray-300"
+                    >
+                      {item.name}
+                    </a>
+                  </Link>
                 ))}
               </div>
             </div>
             <div className="hidden md:flex">
               <button
                 onClick={(e) => {
-                  connector.createSession();
+                  addToast(
+                    "Wallet Connect did not bundle properly with this app, so create account manually"
+                  );
+                  connector?.createSession();
                 }}
-                disabled={connector.connected}
+                disabled={connector?.connected}
                 type="button"
                 className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white disabled:bg-transparent disabled:border-green-500 disabled:text-green-500 disabled:border bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                {connector.connected ? "Connected" : "Connect Wallet"}
+                {connector?.connected ? "Connected" : "Connect Wallet"}
               </button>
             </div>
           </nav>
@@ -180,9 +169,9 @@ export default function Example() {
                     <span className="text-indigo-400 md:block">Investment</span>
                   </h1>
                   <p className="mt-3 text-base text-gray-300 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                    We are Condo Development DAO, we vote($Choice) for condo projects,
-                    then invest on the wining condo with Algo, earn stakes on
-                    that condo
+                    We are Condo Development DAO, we vote($Choice) for condo
+                    projects, then invest on the wining condo with Algo, earn
+                    stakes on that condo
                   </p>
                   <div className="mt-5 max-w-md md:mt-8">
                     <div className="rounded-md shadow">

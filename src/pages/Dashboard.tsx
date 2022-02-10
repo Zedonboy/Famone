@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import { Link, Outlet } from "react-router-dom";
 import { WalletConnectClient } from "../context";
+import {useToasts} from "react-toast-notifications"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", current: true },
@@ -23,6 +24,7 @@ function classNames(...classes) {
 
 export default function Dashboard() {
   let connector = useContext(WalletConnectClient)
+  let {addToast} = useToasts()
   return (
     <>
       <div className="min-h-full">
@@ -71,13 +73,14 @@ export default function Dashboard() {
                       <div className="flex items-center">
                         <button
                           onClick={(e) => {
-                            connector.createSession();
+                            addToast("Wallet Connect failed to get bundled with this app, so create account manually.")
+                            connector?.createSession();
                           }}
-                          disabled={connector.connected}
+                          disabled={connector?.connected}
                           type="button"
                           className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white disabled:bg-transparent disabled:border-green-500 disabled:text-green-500 disabled:border bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                          {connector.connected ? "Connected" : "Connect Wallet"}
+                          {connector?.connected ? "Connected" : "Connect Wallet"}
                         </button>
                       </div>
                     </div>

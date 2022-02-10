@@ -65,7 +65,6 @@ export default function CreateAccountPage() {
               value={mnemonic}
               className="block w-full py-3 border-0 resize-none focus:ring-0 sm:text-sm"
               placeholder="Paste Mnemonic"
-              defaultValue={""}
             />
 
             {/* Spacer element to match the height of the toolbar */}
