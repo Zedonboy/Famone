@@ -1,6 +1,6 @@
 Error
 
-WalletConnect cannot be built with vite yet., try to fix this
+WalletConnect cannot be built with vite yet. I am trying to fix this
 
 for now use
 
