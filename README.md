@@ -1,6 +1,22 @@
-Error
+## Hear me out!!
 
-WalletConnect cannot be built with vite yet. I am trying to fix this
+This project was conceived for the Algorand Schellingpoint Hackerton,
+
+to use this project
+clone it 
+and run `npm run dev`
+
+This project failed to perform in production environment because vite does not like algosdk
+
+`require is not defind error`.
+
+While i work on resolving this issue, use it in development environment
+
+go to admin > content manager > Algo Admin Account > populate the data(mnemonic, node_url)
+then go to admin > content manager > fund-proposal > create new entry.
+
+switch the status property to active(backend creates an ASA for members to invest.)
+Error
 
 for now use
 

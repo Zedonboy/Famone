@@ -8,6 +8,7 @@ import { AlgoClient, WalletConnectClient } from "./context";
 import { HashRouter } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
 import algosdk from "algosdk";
+// import "./scripts/require.js"
 //import QRCodeModal from "algorand-walletconnect-qrcode-modal";
 // import AlgodClient from "algosdk/dist/types/src/client/v2/algod/algod";
 
