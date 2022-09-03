@@ -1,21 +1,33 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import inject from "@rollup/plugin-inject"
+import { NodeGlobalsPolyfillPlugin } from "@esbuild-plugins/node-globals-polyfill";
+import nodePolyfills from "rollup-plugin-polyfill-node";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), inject(
-    { Buffer: ['buffer', 'Buffer'] }
-  )],
-  optimizeDeps: {
-    include: ['algosdk']
-  },
+  plugins: [react()],
   build: {
-    commonjsOptions: {exclude: ['algosdk'], include: []},
-  },
-  resolve: {
-    alias: {
-      path: 'path-browserify'
+    rollupOptions: {
+      plugins: [nodePolyfills()]
+    },
+    commonjsOptions: {
+      transformMixedEsModules: true
     }
+  },
+  define: { global: "globalThis" },
+  optimizeDeps: {
+    esbuildOptions: {
+      // Node.js global to browser globalThis
+      define: {
+        global: "globalThis",
+      },
+      // Enable esbuild polyfill plugins
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          buffer: true,
+        }),
+      ],
+    },
   }
 })
